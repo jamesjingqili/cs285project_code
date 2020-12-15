@@ -1,0 +1,71 @@
+OUNoise:
+  sigma: 0.3
+  theta: 0.15
+PPO:
+  clip_range: 0.2
+  ent_coef: 0.005
+  lr: 0.0003
+  n_minibatches: 32
+  n_opt_epochs: 10
+TRPO:
+  cg_damping: 0.1
+  ent_coef: 0.005
+  max_kl: 0.01
+  n_cg_iters: 10
+  n_vf_iters: 5
+  vf_lr: 0.001
+algorithm: OLBO
+ckpt:
+  base: /tmp/mbrl/logs
+  buf_load: null
+  buf_load_index: 0
+  model_load: null
+  n_save_stages: 10
+  policy_load: null
+  warm_up: null
+env:
+  id: HalfCheetah-v2
+log_dir: ./log
+model:
+  G_coef: 0.5
+  dev_batch_size: 512
+  hidden_sizes:
+  - 500
+  - 500
+  loss: L2
+  lr: 0.001
+  multi_step: 2
+  optimizer: Adam
+  train_batch_size: 128
+  validation_freq: 1
+  weight_decay: 1.0e-05
+plan:
+  max_steps: 500
+  n_envs: 8
+  n_trpo_samples: 4000
+policy:
+  hidden_sizes:
+  - 32
+  - 32
+  init_std: 1.0
+rollout:
+  max_buf_size: 200000
+  n_dev_samples: 10000
+  n_test_samples: 10000
+  n_train_samples: 10000
+  normalizer: policy
+run_id: null
+runner:
+  gamma: 0.99
+  lambda_: 0.95
+  max_steps: 500
+seed: 100
+slbo:
+  n_evaluate_iters: 10
+  n_iters: 20
+  n_model_iters: 100
+  n_policy_iters: 40
+  n_stages: 100
+  opt_model: false
+  start: reset
+use_prev: true
