@@ -1,0 +1,51 @@
+mf_algo: 'trpo'
+proj_dir: '/Users/gavenma/Documents/GitHub/cs285_final_project/code/slbo_pytorch'
+result_dir: './result'
+use_cuda: False
+seed: 0
+verbose: 0
+model_load_path: ~
+buffer_load_path: ~
+save_freq: 2
+eval_freq: 1
+
+env:
+  env_name: 'RLLabSwimmer-v2'
+  num_real_envs: 1
+  num_virtual_envs: 8
+  gamma: 0.99
+  max_episode_steps: 500
+
+ou_noise:
+  theta: 0.15
+  sigma: 0.3
+
+trpo:
+  entropy_coef: 0.005
+  max_kld: 0.01
+  num_env_steps: 500 # 500 x 8 = 4000
+  critic_hidden_dims: [64, 64]
+  actor_hidden_dims: [32, 32]
+  use_limited_ent_actor: True
+  use_gae: True
+  gae_lambda: 0.95
+  use_proper_time_limits: True
+  log_interval: 5
+  l2_reg_coef : 0.
+  norm_reward: False
+
+slbo:
+  num_env_steps: 500
+  num_epochs: 10 # collect num_env_steps per epoch
+  num_iters: 10 # number of iteration per epoch
+  num_model_updates: 100 # number of model updates per iteration
+  num_policy_updates: 10 # number of policy updates per iteration
+  use_prev_data: True
+  dynamics_hidden_dims: [500,500]
+  num_rollout_steps: 2
+  batch_size: 128
+  buffer_size: 200000
+  lr: 0.001
+  l2_reg_coef: 0.00001
+  log_interval: 1
+  start_strategy: 'reset' # choose from 'reset' and 'buffer'
